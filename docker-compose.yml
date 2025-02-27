@@ -1,0 +1,28 @@
+# The docker-compose.yml file is used to define and configure multiple Docker containers
+# in a simple and efficient way. Especially useful for setting up multi-container environments such as 
+# database, webserver, and other services.
+
+version: "3.8"
+services:  # Defines the different services (or containers) that the application needs
+  postgres:  # Name of the service (container)
+    image: postgres:latest  # Refers to the latest official PostgreSQL Docker image available on Docker Hub. 
+    # This image contains everything needed to run a PostgreSQL server
+    
+    environment:  # This section defines environment variables for the PostgreSQL container. These are used
+      # to configure the PostgreSQL instance when the container starts
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password  # Change this to a secure password in production
+      POSTGRES_DB: data_pipeline  # Specifies the name of the database to be created when the PostgreSQL container starts.
+    
+    ports:  # This binds the PostgreSQL container's internal port (5432, the default PostgreSQL port) to the host machine's port 5432.
+      # This allows you to access PostgreSQL from the host machine using localhost:5432
+      - "5435:5432"
+
+    volumes:  # Mounts a named volume (postgres_data) to store the database data. This ensures that even if the container is stopped or deleted,
+      # the data will persist. This is crucial for keeping your database contents across container restarts.
+      - postgres_data:/var/lib/postgresql/data
+
+# Volumes: Global volume definition, defining a named volume called "postgres_data", which will be used to store PostgreSQL data files persistently.
+# This way, even if the container is removed, the data stored in this volume will remain intact.
+volumes:
+  postgres_data:
