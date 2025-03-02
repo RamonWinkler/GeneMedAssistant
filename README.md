@@ -17,3 +17,8 @@ https://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz
 - When the docker-compose.yml file is executed with docker-compose up -d , Docker will pull the PostgreSQL image
 (if not already pulled) and start a container from it.
 - The PostgreSQL container will automatically create the database (as specified in the environment section) 
+
+
+## Database setup:
+- SQLite: for simplicity and small projects
+- PostgreSQL: Better for Scale and Production use
